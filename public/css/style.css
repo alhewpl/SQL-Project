@@ -1,0 +1,61 @@
+
+.row {
+	padding-bottom: 30px;
+}
+
+h1 {
+	text-align: center;
+	padding-bottom: 30px;
+	font-family: 'Helvetica Neue', sans-serif; 
+	font-size: 42px;
+	font-weight: 400;
+	text-shadow: 1px 1px; 
+}
+
+#HistoricalFiguresAsActorsPerCountry {
+	margin: auto;
+}
+
+#movie {
+	text-align: center;
+}
+
+#subtitle {
+	text-align: center;
+	padding-bottom: 20px;
+}
+
+#figures {
+	text-align: center;
+}
+
+h6 {
+	font-size: 12px;
+	text-align: center;
+}
+
+p {
+	text-align: center;
+	font-size: 15px;
+}
+
+#sqlsm {
+	padding-bottom: 30px;
+}
+
+h4, h5 {
+	text-align: center;
+}
+
+#description {
+	position: relative;
+}
+
+#HistoricalFiguresAsActorsPerCountry {
+	padding-bottom: 40px;
+}
+
+h6 #final {
+    text-align: center;
+    padding-bottom: 40px;
+}

@@ -1,0 +1,271 @@
+!!!
+%html
+  %head
+    %title SQL generated charts
+    %link{:href => "https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.css", :rel => "stylesheet"}
+    %link{:rel => "stylesheet", :href => "/css/style.css"}
+    %script{type:"text/javascript", src:"https://www.gstatic.com/charts/loader.js"}
+    %script{type:"text/javascript", src:"https://www.google.com/jsapi"}
+    %script{type:"text/javascript", src:"https://maps.google.com/maps/api/js?key=AIzaSyDHWmOOqcyZOiF9G1b9uoGWKdiOxRSAERA"}
+    :javascript
+      google.charts.load('current', {'packages':['corechart']});
+      
+      google.charts.setOnLoadCallback(leadActors);
+
+      function leadActors() {
+
+        var data = google.visualization.arrayToDataTable(
+          [['Actor names', 'Number of movies']].concat(#{@leadActors})
+        );
+
+        var options = {
+          title: 'Who are the top 10 actors with largest number of leading roles?',
+          colors: ['green'],
+          width: 600,
+          height: 400,
+          bar: {groupWidth: "95%"}
+        };
+
+        var chart = new google.visualization.ColumnChart(document.getElementById("lead_actors"));
+
+        chart.draw(data, options);
+      } 
+
+      google.charts.setOnLoadCallback(countries);
+
+      function countries() {
+
+        var data = google.visualization.arrayToDataTable(
+          [['Actor names', 'Number of movies']].concat(#{@countries})
+        );
+
+        var options = {
+          title: 'What are the top 10 countries where the largest numbers of movies have been issued between 2000 and 2015?',
+          colors: ['#FF8000'],
+          width: 600,
+          height: 400,
+          bar: {groupWidth: "95%"}
+        };
+
+        var chart = new google.visualization.BarChart(document.getElementById("countries"));
+
+        chart.draw(data, options);
+      }
+
+      google.charts.setOnLoadCallback(comedies);
+
+      function comedies() {
+
+        var data = google.visualization.arrayToDataTable(
+          [['Countries', 'Number of comedies']].concat(#{@comedies})
+        );
+
+        var options = {
+          title: 'Comedies made after 2011 per country',
+          width: 600,
+          height: 400,
+          bar: {groupWidth: "95%"},
+          pieHole: 0.4
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById("comedies"));
+
+        chart.draw(data, options);
+      }
+
+      google.charts.setOnLoadCallback(flikes);
+
+      function flikes() {
+
+        var data = google.visualization.arrayToDataTable(
+          [['Genre', 'Likes per genre']].concat(#{@flikes})
+        );
+
+        var options = {
+          title: 'What is the average of facebook likes per movie genre?',
+          colors: ['#FA8258'],
+          width: 600,
+          height: 400,
+          bar: {groupWidth: "95%"}
+        };
+
+        var chart = new google.visualization.AreaChart(document.getElementById("flikes"));
+
+        chart.draw(data, options);
+      }
+
+      google.charts.setOnLoadCallback(genres);
+
+      function genres() {
+
+        var data = google.visualization.arrayToDataTable(
+          [['genre/country', 'Number of movies per genre']].concat(#{@genres})
+        );
+
+        var options = {
+          title: 'How many movies of each genre were issued per country?',
+          colors: ['#641607'],
+          width: 600,
+          height: 400,
+          bar: {groupWidth: "95%"}
+        };
+
+        var chart = new google.visualization.AreaChart(document.getElementById("genres"));
+
+        chart.draw(data, options);
+      }
+
+      google.charts.setOnLoadCallback(maleFemale);
+
+      function maleFemale() {
+
+        var data = google.visualization.arrayToDataTable(
+          [['Occupation', 'Men', 'Women']].concat(#{@maleFemale})
+        );
+
+        var options = {
+          title: 'Gender distribution among occupations',
+          colors: ['red','green'],
+          width: 600,
+          height: 400,
+          bar: {groupWidth: "95%"}
+        };
+
+        var chart = new google.visualization.ColumnChart(document.getElementById("maleFemale"));
+
+        chart.draw(data, options);
+      } 
+
+      google.charts.setOnLoadCallback(countriesHistFigures);
+
+      function countriesHistFigures() {
+
+        var data = google.visualization.arrayToDataTable(
+          [['Country name', 'Historical figures']].concat(#{@countriesHistFigures})
+        );
+
+        var options = {
+          title: 'Countries of origin of most historical figures',
+          width: 600,
+          height: 400,
+          bar: {groupWidth: "95%"}
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById("countriesHistFigures"));
+
+        chart.draw(data, options);
+      }
+
+      google.charts.setOnLoadCallback(WikiPageViews);
+
+      function WikiPageViews() {
+
+        var data = google.visualization.arrayToDataTable(
+          [['Country', 'Wiki page views']].concat(#{@WikiPageViews})
+        );
+
+        var options = {
+          title: 'Where are the most popular on wikipedia Historical Figures from? Show top 10 countries',
+          colors: ['#04B45F'],
+          width: 600,
+          height: 400,
+          bar: {groupWidth: "95%"}
+        };
+
+        var chart = new google.visualization.BarChart(document.getElementById("WikiPageViews"));
+
+        chart.draw(data, options);
+      }
+
+      google.charts.load('current', {'packages':['geochart']});
+      google.charts.setOnLoadCallback(occupationPerCountry);
+
+      function occupationPerCountry() {
+
+        var data = google.visualization.arrayToDataTable(
+          [['OccupationPerCountry', 'Number of historical figures in each role per country ']].concat(#{@occupationPerCountry})
+        );
+
+        var options = {
+          title: 'What are the most widely spread occupations in each country?',
+          width: 600,
+          height: 400,
+          bar: {groupWidth: "95%"}
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('occupationPerCountry'));
+
+        chart.draw(data, options);
+      }
+
+
+      google.charts.setOnLoadCallback(HistoricalFiguresAsActorsPerCountry);
+
+      function HistoricalFiguresAsActorsPerCountry() {
+
+        var data = google.visualization.arrayToDataTable(
+          [['Actors', 'Country']].concat(#{@HistoricalFiguresAsActorsPerCountry})
+        );
+
+        var options = {
+          datalessRegionColor: '#b2b0b0',
+          defaultColor: '#5e7763'
+        };
+
+        google.charts.load('current', {'packages': ['geochart']});
+
+        var chart = new google.visualization.GeoChart(document.getElementById("HistoricalFiguresAsActorsPerCountry"));
+
+        chart.draw(data, options);
+      }
+
+
+  %body
+    %header 
+      %h1 FrauenLoop Final Project
+    %div{class:"container-fluid"}
+      %h2{id: "movie"} 1) Movie dataset charts
+      %p Based on %a{href: "https://www.kaggle.com/deepmatrix/imdb-5000-movie-dataset", title: "IMDB 5000 mobie dataset"} IMDB 5000 movie dataset
+      %div{class:"row"}
+        %div{class:"col-md-6"}
+          %div{id:"lead_actors"}
+          %h6 SQL Query: SELECT actor_name, COUNT(role) as num_films FROM casting WHERE role = 'lead' GROUP BY actor_name HAVING COUNT(role) > 15 ORDER BY num_films DESC LIMIT 10;
+        %div{class:"col-md-6"}
+          %div{id:"countries"}
+          %h6 SQL Query: SELECT DISTINCT name, COUNT(movie_title) as num_films FROM Countries JOIN movies ON country_id = Countries.id WHERE issue_year BETWEEN 2000 AND 2015 GROUP BY name ORDER BY num_films DESC LIMIT 10;
+      %div{class:"row"}
+        %div{class:"col-md-6"}
+          %div{id:"comedies"}
+          %h6 SQL Query: SELECT name, COUNT(genre) as num_comedies FROM movies JOIN Countries ON country_id = Countries.id JOIN Movie_genres on Movie_genres.id = movies.id WHERE genre IN ('Comedy') AND issue_year > 2011 GROUP BY name ORDER BY num_comedies DESC LIMIT 5;
+        %div{class:"col-md-6"}
+          %div{id:"flikes"}
+          %h6{id:"sqlsm"} SQL Query: SELECT genre, AVG(facebook_likes) FROM movies JOIN Movie_genres on Movie_genres.id = movies.id GROUP BY genre HAVING AVG(facebook_likes) > 0 ORDER BY AVG(facebook_likes) DESC LIMIT 15;
+      %div{class:"row"}
+        %div{class:"col-md-6"}
+          %div{id: "genres"}
+          %h6 SQL Query: SELECT genre ||"-"|| name AS genre_country, COUNT(movie_title) AS num_movies from movies JOIN Movie_genres ON movies.id = Movie_genres.id JOIN Countries ON country_id = Countries.id GROUP BY genre_country ORDER BY num_movies DESC LIMIT 10;
+      %h2{id:"figures"} 2) Historical Figures charts
+      %p Based on Pantheon Project that measures the global popularity of historical characters  
+      %div{class:"row"}
+        %div{class:"col-md-6"}
+          %div{id:"maleFemale"}
+          %h6 SQL Query: SELECT occupation, (count(case when sex = 'Male' then 1 end)) AS men,(count(case when sex = 'Female' then 1 end)) AS women from Historical_figures GROUP BY occupation ORDER BY "men" DESC LIMIT 10;
+        %div{class:"col-md-6"}
+          %div{id:"countriesHistFigures"}
+          %h6 SQL Query: SELECT name, COUNT(full_name) FROM Countries JOIN Historical_figures ON country_id = Countries.id GROUP BY name ORDER BY COUNT(full_name)DESC LIMIT 10;
+      %div{class:"row"}
+        %div{class:"col-md-6"}
+          %div{id:"WikiPageViews"}
+          %h6 SQL Query: SELECT name, MAX(Wiki_page_views) FROM Countries JOIN Historical_figures ON country_id = Countries.id GROUP BY name ORDER BY MAX(Wiki_page_views) DESC LIMIT 10;
+        %div{class:"col-md-6"}
+          %div{id:"occupationPerCountry"}
+          %h6 SQL Query: SELECT name ||"-"|| occupation AS occupation_per_country, COUNT(occupation) AS num_occupations FROM Countries JOIN Historical_figures ON country_id = Countries.id GROUP BY occupation_per_country ORDER BY num_occupations DESC LIMIT 10;
+    %h4 Correlation between the 2 datasets
+    %h5 Countries producing the largest number of historical figures that are also actors   
+    %div{id:"HistoricalFiguresAsActorsPerCountry",style:"width: 800px; height: 500px;"}
+    %div{class:"col-md-6"}
+      %h6 A previously performed query showed that in the US the most widely spread occupation is 'actor'. From the 1192 historical figures with an 'actor' occupation, 408 are also part of the movie dataset as actors, out of which 258 are American. Out of 4910 movies, 3715 are filmed in the US. This all leads to the conclusion that a. movie industry is very important for the US and b. if you want to be popular on a global scale, you should probably be an actor in the States.  
+
+    %div{class:"col-md-6"}
+      %h6 SQL Query: SELECT name AS country, COUNT(*) AS actors FROM Historical_figures JOIN Countries ON country_id = Countries.id WHERE occupation = 'Actor' AND full_name IN (SELECT full_name FROM Historical_figures INTERSECT SELECT actor_name FROM casting) GROUP BY name ORDER BY actors DESC LIMIT 10;)      
+
